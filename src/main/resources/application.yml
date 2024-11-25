@@ -1,0 +1,22 @@
+api:
+  prefix: /api/v1
+server:
+  port: 8080
+spring:
+  application:
+    name: Task Management System
+  datasource:
+    url: ${{db_connection_string}}
+    username: ${{db_username}}
+    password: ${{db_password}}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+    database: mysql
+#   database-platform:
