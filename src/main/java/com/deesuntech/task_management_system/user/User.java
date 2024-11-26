@@ -1,9 +1,8 @@
 package com.deesuntech.task_management_system.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.deesuntech.task_management_system.task.Task;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,13 +23,23 @@ public class User {
 
     private String name;
     private String email;
+
+    @JsonIgnore
     private String password;
 
     private String status;
 
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
+
+
+    //Relationship
+
+    //A User can have multiple Task
+    @JsonIgnore
+    @OneToMany(mappedBy = "createdBy")
+    private List<Task> tasks;
 }
